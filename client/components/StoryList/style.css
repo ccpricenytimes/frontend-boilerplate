@@ -1,0 +1,32 @@
+@import "../../BaseStyles/media.css";
+:root {
+    --grid-unit-mini: 15px;
+}
+
+.list {
+    border: 2px solid red;
+    list-style: none;
+    display: flex;
+    width: 80%;
+    margin: var(--grid-unit-mini) auto;
+    justify-content: space-between;
+}
+/*@custom-media --small-viewport from "../../BaseStyles.css";*/
+
+@media (--small-viewport) {
+  .list {
+    display: none;
+  }
+}
+
+@media(--viewport-medium) {
+    .list {
+        background-color: green;
+    }
+}
+
+@media(--viewport-large) {
+    .list {
+        background-color: blue;
+    }
+}

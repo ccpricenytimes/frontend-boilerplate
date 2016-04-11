@@ -1,6 +1,8 @@
 var rucksack = require('rucksack-css')
 var webpack = require('webpack')
 var path = require('path')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var env = process.env.NODE_ENV || 'development';
 
 module.exports = {
   context: path.join(__dirname, './client'),
@@ -22,11 +24,13 @@ module.exports = {
       {
         test: /\.css$/,
         include: /client/,
-        loaders: [
-          'style-loader',
-          'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-          'postcss-loader'
-        ]
+        loader: env === 'production' ?
+                    ExtractTextPlugin.extract('style-loader',
+                      'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader'
+                    ) :
+                    'style-loader!' +
+                      'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!' +
+                      'postcss-loader'
       },
       {
         test: /\.css$/,
@@ -47,15 +51,16 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   postcss: [
-    rucksack({
-      autoprefixer: true
-    })
+    require("postcss-import")(),
+    require("postcss-cssnext")(),
+    require('postcss-nested')(),
   ],
   plugins: [
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development') }
-    })
+    }),
+    new ExtractTextPlugin('styles.css')
   ],
   devServer: {
     contentBase: './client',
