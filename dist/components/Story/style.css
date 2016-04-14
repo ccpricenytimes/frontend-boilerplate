@@ -1,0 +1,25 @@
+.story {
+    background-color: #cccccc;
+    border: 1px solid #333333;
+    padding: 4px;
+    width: 125px
+
+}
+
+.story.featuredStory {
+    width: 250px;
+    border: 2px solid green
+
+}
+
+.headline {
+    font-weight: bold;
+}
+
+.summary {
+    color: blue;
+}
+
+.featured-story {
+    background-color: blue;
+}

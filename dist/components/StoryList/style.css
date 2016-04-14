@@ -1,0 +1,32 @@
+:root {
+}
+.list {
+    border: 2px solid red;
+    list-style: none;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 80%;
+    margin: 15px auto;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+}
+/*@custom-media --small-viewport from "../../BaseStyles.css";*/
+@media (max-width: 600px) {
+  .list {
+    display: none;
+  }
+}
+@media(min-width: 601px) and (max-width: 900px) {
+    .list {
+        background-color: green;
+    }
+}
+@media(min-width: 901px) {
+    .list {
+        background-color: blue;
+    }
+}
